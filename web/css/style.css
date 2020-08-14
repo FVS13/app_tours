@@ -1,0 +1,982 @@
+:root {
+	--progress-line: #00c3a5;
+}
+
+input::-ms-clear {
+   display: none;
+}
+#calendarBig { /* весь календарь */
+  width: 100%;
+  margin: 0 auto;
+  overflow-x: scroll;
+  display: block;
+}
+#calendarBig td {
+  vertical-align: top;
+  padding-right: 26px;
+  font-size: 10px;
+    padding-bottom: 0px;
+    border-bottom: none;
+    margin-bottom: 0px;
+}
+#calendarBig table tr td{
+	padding-right: 0;
+	padding-left: 0;
+	text-align: center;
+	border-bottom: 0;
+
+}
+#calendarBig table thead tr td{
+	text-transform: uppercase;
+    font-weight: normal;
+    font-family: tahoma;
+    color: #000;
+}
+#calendarBig table thead tr td:nth-child(6), #calendarBig table thead tr td:nth-child(7){
+	color: #a728a3;
+}
+#calendarBig > thead td:not(:nth-child(2)) { /* предыдущий-следующий года */
+  text-decoration: underline;
+  color: rgb(0, 119, 204);
+  cursor: pointer;
+}
+#calendarBig > thead td:not(:nth-child(2)):hover { /* если наведён курсор на предыдущий-следующий года */
+  color: #ff3200;
+}
+#calendarBig > thead td:nth-child(2) { /* текущий год */
+  font-size: 150%;
+  font-weight: 700;
+  color: rgb(140, 61, 2);
+}
+#calendarBig, #calendarBig table {
+  font: monospace;
+  line-height: 1.2em;
+  font-size: 15px;
+  text-align: center;
+}
+#calendarBig table { /* таблицы с месяцами выравнены по верхней границе, горизонтально — по центру */
+  display: inline-table;
+}
+#calendarBig table thead tr:nth-child(1) { /* названия месяцев */
+  font-size: 110%;
+  font-weight: 700;
+}
+#calendarBig table thead tr:last-child { /* название дней недели */
+  font-size: small;
+  font-weight: 700;
+  color: rgb(103, 103, 103);
+}
+#calendarBig table tbody td { /* дни */
+  color: #000;
+}
+#calendarBig table tbody td:nth-child(n+6), #calendarBig .holiday { /* выходные и праздники */
+  color: #a728a3;
+}
+#calendarBig table tbody td.today { /* сегодня */
+  color: #2e5bff;
+}
+#calendarBig table tbody td[title] { /* выделенные даты */
+  outline: 3px solid green;
+  background: yellow;
+  cursor: help;
+}
+#calendarBig table tbody td[title] a { /* выделенные даты-ссылки */
+  display: block;
+  text-decoration: none;
+}
+#calendarBig table tbody td[title] a:hover { /* выделенные даты-ссылки под курсором */
+  background: #fde910;
+  color: red;
+}
+
+#calendar2, #calendar3, #calendar4 {
+  width: 150px;
+  font: tahoma;
+  text-align: center;
+}
+#calendar2 thead tr:last-child, #calendar3 thead tr:last-child, #calendar4 thead tr:last-child {
+  font-size: small;
+  color: rgb(85, 85, 85);
+}
+#calendar2 thead tr:nth-child(1) td:nth-child(2), #calendar3 thead tr:nth-child(1) td:nth-child(2), #calendar4 thead tr:nth-child(1) td:nth-child(2) {
+  color: rgb(50, 50, 50);
+}
+#calendar2 thead tr:nth-child(1) td:nth-child(1):hover, #calendar2 thead tr:nth-child(1) td:nth-child(3):hover, #calendar3 thead tr:nth-child(1) td:nth-child(1):hover, #calendar3 thead tr:nth-child(1) td:nth-child(3):hover, #calendar4 thead tr:nth-child(1) td:nth-child(1):hover, #calendar4 thead tr:nth-child(1) td:nth-child(3):hover {
+  cursor: pointer;
+}
+#calendar2 tr, #calendar3 tr, #calendar4 tr{
+	background: none;
+}
+#calendar2 tbody td, #calendar2 thead td, #calendar3 tbody td, #calendar3 thead td, #calendar4 tbody td, #calendar4 thead td {
+  color: #000;
+  line-height: 1.2em;
+  font-size: 10px;
+  padding-left: 0;
+  text-align: center;
+}
+#calendar2 tbody td, #calendar3 tbody td, #calendar4 tbody td{
+	cursor: pointer;
+}
+#calendar2 tbody td:hover, #calendar3 tbody td:hover, #calendar4 tbody td:hover{
+	text-decoration: underline;
+}
+#calendar2 tbody td:nth-child(n+6), #calendar2 .holiday, #calendar3 tbody td:nth-child(n+6), #calendar3 .holiday, #calendar4 tbody td:nth-child(n+6), #calendar4 .holiday {
+  color: #a728a3;
+}
+#calendar2 tbody td.today, #calendar3 tbody td.today, #calendar4 tbody td.today {
+  color: #2e5bff;
+}
+
+.clear{
+	clear: both;
+}
+
+button{
+	padding: 5px 8px;
+    border: none;
+    background-color: #f4f6fc;
+    font-family: tahoma;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+button:disabled{
+	text-decoration: none;
+	cursor: default;
+}
+button:hover{
+	text-decoration: none;
+}
+select{
+	height: 24px;
+}
+input, select{
+	font-size: 12px;
+	font-family: tahoma;
+}
+
+body.adm-body{
+	background: #f4f6fc;
+	margin: 0;
+	font-family: tahoma;
+	font-size: 14px;
+}
+.adm-container{
+	width: 1400px;
+	margin: 0 auto;
+}
+.adm-header{
+	padding-left: 40px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	background: #fff;
+	margin-top: 10px;
+	box-shadow: 1px 1px 1px #e4e8f0;
+}
+.adm-header .logo{
+	font-family: tahoma;
+	font-size:18px;
+	color: #2e384d;
+	background: url(../images/logo.png) left center no-repeat;
+	padding-left: 30px;
+}
+.adm-main{
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.adm-sidebar{
+	width: 180px;
+}
+.adm-content{
+	width: 1200px;
+}
+table{
+	width: 100% !important;
+	padding-bottom: 50px;
+}
+table tr{
+	background: #fafbfe;
+}
+table .tr_bottom th{
+	border-bottom: 7px solid #f4f6fc;
+}
+table td, table th{
+	font-family: tahoma;
+	font-size: 14px;
+	text-align: left;
+	padding-left: 8px;
+	vertical-align: top;
+}
+table tr:nth-child(1) th{
+	padding-top: 18px;
+}
+table tr:nth-child(2) th{
+	padding-bottom: 10px;
+}
+table td img{
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+}
+table th a{
+	color: #000;
+	line-height: 18px;
+	display: flex;
+}
+.mnogo_strok p{
+	text-decoration: underline;
+	margin: 0;
+}
+.download-exel{
+	padding-left: 10px;
+	padding-right: 5px;
+	padding-top: 4px;
+}
+.mnogo_strok p.no-underline{
+	text-decoration: none;
+}
+.a_mnogo_strok{
+	text-decoration: none;
+}
+.goroda_table tr:nth-child(2n) td{
+	background-color: #f4f6fc;
+}
+.goroda_table tr:nth-child(1), .goroda_table tr.tr_bottom{
+	background-color: #fff;
+}
+.adm-sidebar ul{
+	padding-top: 50px;
+	margin-top: 0;
+	padding-left: 0;
+	background: #fff;
+	box-shadow: 1px 1px 1px #e4e8f0;
+	padding-bottom: 30px;
+}
+.adm-sidebar ul li{
+	list-style: none;
+}
+.adm-sidebar ul li a::before{
+	background-image: url(../images/left-sidebar-icons.png);
+	content: '';
+	background-repeat: no-repeat;
+	background-size: 200% 400%;
+	width: 21px;
+	height: 21px;
+	display: block;
+}
+.adm-sidebar ul li:nth-child(2) a::before{
+	background-position-y: -21px;
+}
+.adm-sidebar ul li:nth-child(3) a::before{
+	background-position-y: -44px;
+}
+.adm-sidebar ul li:nth-child(4) a::before{
+	background-position-y: -65px;
+}
+.adm-sidebar ul li a{
+	font-family: tahoma;
+	font-size: 16px;
+	color: #b0bac9;
+	width: 180px;
+	display: flex;
+	padding-left: 15px;
+	padding-top: 13px;
+	padding-bottom: 13px;
+	text-decoration: none;
+}
+.adm-sidebar ul li.active a{
+	border-left: 2px solid #2e5bff;
+	padding-left: 13px;
+	color: #2e5bff;
+	background-color: #eff2ff;
+}
+.adm-sidebar ul li a:hover{
+	padding-left: 15px;
+	color: #2e5bff;
+	background-color: #eff2ff;
+}
+.adm-sidebar ul li.active a:hover{
+	padding-left: 13px;
+}
+.adm-sidebar ul li a:hover::before, .adm-sidebar ul li.active a::before{
+	background-position-x:-21px;
+}
+.adm-sidebar ul li a p{
+	width: 100px;
+	margin: 0;
+    margin-left: 10px;
+}
+.left_right_a{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+table td.td_center{
+	text-align: center;
+}
+table td a{
+	color: #000;
+}
+.dve_knopki{
+	display: flex;
+	justify-content: center;
+}
+.dve_knopki a{
+	margin: 5px;
+}
+table.napravl_table td{
+	border-bottom: none;
+	padding-top: 7px;
+}
+table.napravl_table tr:nth-child(2n+1) td{
+	background-color: #f4f6fc;
+}
+.adm_cont_head{
+	padding: 20px;
+	background: #fff;
+	margin-bottom: 10px;
+	box-shadow: 1px 1px 1px #e4e8f0;
+}
+.adm_head_selects{
+	display: flex;
+
+}
+.adm_head_selects .adm_select{
+	margin-right: 18px;
+}
+.adm_head_selects .adm_select:nth-child(3){
+	display: block;
+	flex-wrap: wrap;
+	width: 130px;
+}
+.adm_head_selects .adm_select:nth-child(3) p{
+	width: 100%;
+}
+.adm_head_selects .adm_select:nth-child(4){
+	width: 130px;
+}
+.adm_select p{
+	margin-bottom: 5px;
+	margin-top: 0;
+}
+.adm_head_selects .adm_select select{
+	width: 100%;
+}
+.adm_head_buttons{
+	margin-top: 25px;
+	display: flex;
+	justify-content: left;
+}
+.adm_head_buttons_right{
+	margin-top: 25px;
+	display: flex;
+	justify-content: flex-end;
+}
+.adm_head_buttons_right button{
+	margin-right: 20px;
+}
+.adm_perekl_container{
+	padding: 20px;
+    background: #fff;
+    margin-bottom: 10px;
+    box-shadow: 1px 1px 1px #e4e8f0;
+    font-size: 14px;
+    font-family: tahoma;
+    display: flex;
+    flex-direction: row;
+}
+.adm_perekl_row{
+	min-width: 210px;
+	margin-right: 30px;
+}
+.adm_form_block{
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 20px;
+	align-items: center;
+}
+.adm_form_block p{
+	margin-right: 30px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+/* .adm_form_block label{
+	margin-right: 20px;
+	width: 20px;
+} */
+.perekl_knopka{
+	background-image: url(../images/knopka_perekl.png);
+	width: 53px;
+	height: 21px;
+	background-position: top;
+	cursor: pointer;
+}
+.perekl_knopka.active{
+	background-position: bottom;
+}
+.adm_form_block button{
+    margin-right: 20px;
+}
+.sv_p{
+	padding-top: 5px;
+	color: #c3c8d5;
+}
+.adm_content a{
+	color: #000;
+}
+.adm_content a:hover{
+	text-decoration: none;
+}
+.adm_form_block input[type='checkbox']{
+	display: none;
+}
+.button_right{
+	position: relative;
+	right: 0;
+}
+.adm_spoiler_plus{
+	position: absolute;
+	top: 5px;
+	left: 0px;
+	cursor: pointer;
+	font-family: arial;
+	font-weight: bold;
+}
+.adm_spoiler_noclick{
+	position: absolute;
+	top: 5px;
+	left: 0px;
+	color: #8c8c8c;
+    font-size: 22px;
+    line-height: 15px;
+}
+.adm_tabl_div_content{
+	max-height: 600px;
+	overflow-y: scroll;
+}
+.adm_tabl_head, .adm_tabl_spoiler_otkrito{
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+.adm_tabl_head{
+	font-weight: bold;
+}
+.adm_tabl_head .adm_tab_head_block, .adm_tabl_spoiler_otkrito .adm_tab_spoiler_block{
+	padding: 5px;
+}
+.adm_tabl_head, .adm_tabl_spoiler:nth-child(2n){
+	background-color: #fafbfe;
+}
+.adm_tabl_head .adm_tab_head_block:nth-child(1), .adm_tabl_spoiler_otkrito .adm_tab_spoiler_block:nth-child(2){
+	padding-left: 15px;
+	width: 7%;
+	text-align: right;
+	padding-right: 16px;
+}
+.adm_tabl_head .adm_tab_head_block:nth-child(2), .adm_tabl_spoiler_otkrito .adm_tab_spoiler_block:nth-child(3){
+	width: 25%;
+}
+.adm_tabl_head .adm_tab_head_block:nth-child(3), .adm_tabl_spoiler_otkrito .adm_tab_spoiler_block:nth-child(4){
+	width: 18%;
+}
+.adm_tabl_head .adm_tab_head_block:nth-child(4), .adm_tabl_spoiler_otkrito .adm_tab_spoiler_block:nth-child(5){
+	width: 12%;
+}
+.adm_tabl_head .adm_tab_head_block:nth-child(5), .adm_tabl_spoiler_otkrito .adm_tab_spoiler_block:nth-child(6){
+	width: 12%;
+}
+.adm_tabl_head .adm_tab_head_block:nth-child(6), .adm_tabl_spoiler_otkrito .adm_tab_spoiler_block:nth-child(7){
+	width: 17%;
+}
+.adm_tabl_head .adm_tab_head_block:nth-child(7), .adm_tabl_spoiler_otkrito .adm_tab_spoiler_block:nth-child(8){
+	width: 17%;
+}
+
+.adm_tabl_head, .adm_tabl_spoiler:nth-child(1n) #calendarBig tr{
+	background: none;
+}
+.adm_tabl_head, .adm_tabl_spoiler:nth-child(2n) #calendarBig tr td, .adm_tabl_head, .adm_tabl_spoiler:nth-child(2n) #calendar_year tr td{
+	border-color: #fff;
+	background: #fff;
+}
+.adm_tabl_head2{
+	background-color: #fff;
+	padding-top: 5px;
+	padding-bottom: 12px;
+	display: flex;
+	flex-direction: row;
+	padding-left: 140px;
+	font-style: italic;
+}
+.adm_tabl_head2 .adm_tab_head_block:nth-child(1), .naprav_podtablica .naprav_podtablica_row:nth-child(2){
+	width: 50px;
+	font-style: italic;
+}
+.adm_tabl_head2 .adm_tab_head_block:nth-child(2), .adm_tabl_head2 .adm_tab_head_block:nth-child(3), .naprav_podtablica .naprav_podtablica_row:nth-child(3), .naprav_podtablica .naprav_podtablica_row:nth-child(4){
+	width: 130px;
+	font-style: italic;
+}
+.naprav_podtablica .naprav_podtablica_row:nth-child(5){
+	font-style: italic;
+}
+.naprav_podtablica{
+	display: flex;
+	flex-direction: row;
+	padding-left: 95px;
+}
+.naprav_podtablica .naprav_podtablica_row:nth-child(1){
+	width: 45px;
+}
+
+#calendar_year{
+	margin-top: 15px;
+	display: none;
+}
+#calendar_year tr{
+	background: none;
+}
+#calendar_year td{
+	text-align: center;
+}
+#calendar_year td:nth-child(1), #calendar_year td:nth-child(3){
+	text-decoration: underline;
+	cursor: pointer;
+}
+#calendar_year td:hover{
+	text-decoration: none;
+}
+.calendar_display_none{
+	display: none;
+}
+.adm_tabl_spoiler_skrito{
+	display: none;
+}
+.adm_tabl_spoiler_skrito.spoiler_otkrit{
+	display: block;
+}
+.adm_tabl_spoiler_otkrito .spoiler_minus{
+	font-size: 22px;
+    line-height: 15px;
+    font-weight: normal;
+}
+.adm_popup,
+.adm_popup_for_transit_city {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: 500;
+	display: none;
+}
+.popup_over{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: 501;
+	background: rgba(0,0,0,0.6);
+	cursor: pointer;
+}
+.popup_form{
+	position: absolute;
+	z-index: 502;
+	width: 630px;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	height: 580px;
+	background: #fff;
+	border: 2px solid #e7e8e9;
+	border-radius: 2px;
+}
+.popup_container{
+	width: 100%;
+    margin: 0 auto;
+    padding-top: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.popup_container.popup_log{
+	overflow-y: scroll;
+	height: 576px;
+}
+.popup_container.popup_log p{
+	margin-top: 0;
+	margin-bottom: 5px;
+}
+.popup_container h2{
+	font-family: tahoma;
+    font-size: 16px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+.popup_container .form_stroka{
+	margin-bottom: 15px;
+	display: flex;
+}
+.popup_container .form_stroka > span{
+	width: 33.3%;
+	display: block;
+}
+.popup_container .form_stroka input{
+	width: 66.6%;
+	color: #000;
+}
+.popup_container .form_stroka input.uzkiy_input{
+	width: 70px;
+}
+.popup_container .form_stroka input.input_gmt{
+	width: 30px;
+}
+.popup_container button{
+	float: right;
+}
+.popup_close{
+	cursor: pointer;
+	position: absolute;
+	right: -15px;
+	top: -15px;
+	width: 30px;
+	height: 30px;
+	background: url("../images/popup_close.png");
+}
+.popup_container p{
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+.radio_container{
+	display: flex;
+	flex-direction: row;
+}
+.radio_left, .radio_right{
+	display: flex;
+	flex-direction: column;
+}
+.radio_left{
+	margin-right: 20px;
+}
+.radio_left .radio_input_block, .radio_right select, .radio_right input{
+	margin-bottom: 10px;
+}
+
+.input_data_otprav{
+	position: relative;
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+.input_data_otprav table{
+	position: absolute;
+	background: #fff;
+	left: 0;
+    right: 0;
+    margin: auto;
+    border: 1px solid #e4e8f0;
+    top: 26px;
+    z-index: 10;
+    display: none;
+}
+input[name="data_otprav_s"], input[name="data_otprav_po"]{
+	width: 67px;
+	height: 24px;
+	border: none;
+}
+input[name="input_obnov_posle"]{
+	height: 24px;
+	width: 100px;
+	border: none;
+}
+.primenit_istochnik{
+	margin-left: 250px;
+}
+span.fiol{
+	color: #a728a3;
+}
+
+
+
+
+.table-tab {
+	background: white;
+	width: 350px;
+	padding: 19px;
+	text-align: center;
+	cursor: pointer;
+	user-select: none;
+}
+
+.table-tabs {
+	display: flex;
+	padding-bottom: 15px;
+	justify-content: space-between;
+}
+
+#table-tab-1:checked ~ .table-tabs > [for="table-tab-1"],
+#table-tab-2:checked ~ .table-tabs > [for="table-tab-2"],
+#table-tab-3:checked ~ .table-tabs > [for="table-tab-3"] {
+  background: #eff2ff;
+  color: #2e5bff;
+  font-weight: bold;
+}
+
+.tr_bottom th:nth-child(2) {
+    min-width: 310;
+}
+.tr_bottom th:nth-child(3) {
+    min-width: 68;
+}
+.tr_bottom th:nth-child(4) {
+    min-width: 58;
+}
+
+#table-tab-1 ~ #table-tab-1,
+#table-tab-2 ~ #table-tab-2,
+#table-tab-3 ~ #table-tab-3 {
+    display: none;
+}
+
+#table-tab-1:checked ~ #table-tab-1,
+#table-tab-2:checked ~ #table-tab-2,
+#table-tab-3:checked ~ #table-tab-3 {
+    display: block;
+}
+
+.dataTables_info {
+  order: 2;
+	text-align: right;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding-top: 0 !important;
+}
+.dataTables_filter {
+  order: 1;
+}
+.dataTable {
+  order: 3;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+	padding: 6px 10px;
+}
+
+.select2-container--default .select2-results > .select2-results__options {
+	max-height: 320px !important;
+}
+
+.naprav_podtablica {
+	font-size: 13px;
+}
+
+.adm_content a {
+	cursor: pointer;
+	/* user-select: none; */
+	display: block;
+}
+
+.adm_select p {
+	margin-bottom: 15px;
+}
+
+.edit_transit_city,
+.remove_transit_city,
+.add_transit_city,
+.attach_alt_city_button,
+.edit_city {
+	cursor: pointer;
+	user-select: none;
+}
+
+.sort {
+	background-image: url("/datatables/DataTables-1.10.21/images/sort_both.png");
+	background-repeat: no-repeat;
+	background-position: center right;
+}
+.sort_vverh{
+	background-image: url("/datatables/DataTables-1.10.21/images/sort_desc.png");
+}
+.sort_vniz{
+	background-image: url("/datatables/DataTables-1.10.21/images/sort_asc.png");
+}
+
+.select2-container .select2-selection--single {
+	height: 32px !important;
+}
+
+#new-city-table th {
+    width: 33% !important;
+}
+
+
+th.sorting,
+th.sorting_asc,
+th.sorting_desc,
+.adm_tab_head_block.adm_tab_head_block.sorting,
+.attach_alt_city_button,
+.add_transit_city  {
+	text-decoration: underline;
+}
+
+#routes-table .adm_tabl_head .adm_tab_head_block,
+th {
+	border-right-width: 1px;
+	border-right-style: groove;
+	vertical-align: middle !important;
+	padding: 10px !important;
+	text-align: center !important;
+}
+
+
+
+
+#binded_airports_list {
+	margin-left: 188px;
+	margin-top: 32px;
+}
+
+.adm_popup .errors {
+	padding-left: 15px;
+	padding-bottom: 25px;
+	color: #98589a;
+}
+
+table {
+	padding-top: 15px;
+}
+
+#transit-city-table_wrapper {
+	margin-top: 20px;
+}
+
+#transit-city-table tbody td:last-child {
+	display: flex;
+	justify-content: space-evenly;
+}
+#transit-city-table thead th:last-child {
+	width: 13% !important;
+}
+
+[for="binded_airport__is_tracked"] {
+  cursor: pointer;
+  background-image: url(/images/knopka_perekl.png);
+  background-repeat: no-repeat;
+  padding-right: 60px;
+  background-position: top right;
+  height: 21px;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  color: #98589a;
+}
+
+#binded_airport__is_tracked:checked + [for="binded_airport__is_tracked"] {
+  background-position: bottom right;
+  color: black;
+}
+
+.binded-airport-not-tracked .tracked_airport_name,
+.binded-airport-not-tracked .distance_to_airport,
+.binded-airport-not-tracked .tracked_airport_code {
+	color: #aaaaaa !important;
+}
+
+.sv_p {
+	border-radius: 9px;
+	padding: 6px 9px;
+}
+
+.sv_p.finished {
+	background: #f4f6fc !important;
+	color: #b5b5b5;
+}
+
+.sv_p.error,
+.sv_p.fatal-error,
+.sv_p.stopped {
+	background: #98589a !important;
+	color: white;
+}
+
+.sv_p.processing {
+	background: linear-gradient(to right, var(--progress-line) var(--progress-percent, 0), white var(--progress-percent, 0));
+	border: 1px solid;
+}
+
+.setting,
+.param {
+	display: inline-block;
+	width: 135px;
+	height: 21px;
+	padding-left: 0px;
+	background-image: url(../images/knopka_perekl.png);
+	background-position-x: 40px;
+	background-position-y: top;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	user-select: none;
+}
+
+input[type="checkbox"]:checked + .setting,
+input[type="checkbox"]:checked + .param {
+	background-position-y: bottom;
+}
+
+.setting::before,
+.param::before {
+  content: 'Выкл';
+}
+
+input[type="checkbox"]:checked + .setting::before,
+input[type="checkbox"]:checked + .param::before {
+    content: 'Вкл';
+}
+
+.setting.yes-no::before {
+  content: 'Нет';
+}
+
+input[type="checkbox"]:checked + .setting.yes-no::before {
+    content: 'Да';
+}
+
+.halt-tasks {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.halt-tasks button[type="submit"] {
+	height: 30px;
+}
+
+#view-data-table_filter {
+  display: none;
+}
+
+#view-data-table_wrapper {
+  padding-top: 20px;
+}
+
+.notice {
+	color: #c3c8d5;
+}
+
+.adm_perekl_container__v {
+	background: white;
+	margin-top: -10px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+.adm_perekl_container__v button[type="submit"] {
+	width: 150px;
+	text-align: left;
+	margin: 0 90px 0px 20px;
+	background: white;
+}
+

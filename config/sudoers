@@ -1,0 +1,2 @@
+www-data ALL = (root) NOPASSWD: /usr/bin/rsync
+www-data ALL = (root) NOPASSWD: /usr/bin/chown
